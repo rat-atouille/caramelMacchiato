@@ -38,7 +38,30 @@ router.post("/register", async(req, res) => {
   const { email, username } = req.body;
   const verificationCode = getRandomInt();    // create 6 digit verification code
 
-  const checkExist = 'SELECT';
+  // check if email already exists
+  const checkExist = 'SELECT email FROM users WHERE email = ?';
+  const register = 'INSERT INTO users (username, email) VALUES (?, ?)';
+
+  try {
+    const [results] = await.db.query(checkExist, [email]);
+
+    // already exists
+    if (results.length > 0) {
+      return results.status(409).json({message: "User already exists with this email address."});
+    }
+  
+  }
+          
+      
+      db.query(register, [username, email], (error, results, fields) => {
+        if (error) {
+          return;
+        }
+        return results.status(201).json({message: "User created."})
+      })
+    }
+  })
+
 
   const mailOptions = {
     from: process.env.EMAIL_USER,
@@ -53,6 +76,9 @@ router.post("/register", async(req, res) => {
   } catch (error) {
       res.status(500).send('error sending email')
   }
+
+
+
 })
 /*
 

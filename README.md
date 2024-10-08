@@ -17,5 +17,5 @@ Inspired by Animal Crossing's beloved characters, the pigeon guy and the white d
 - ### Testing ###
   - Jest
 
-  ## Packages/Libraries ##
-  - axios, react-router-dom
+## Packages/Libraries ##
+- axios, react-router-dom
